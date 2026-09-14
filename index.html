@@ -3,624 +3,358 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>for you</title>
+<title>Ritika Lands in Coventry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#241b38;
-    --bg-mid:#372a54;
-    --bg-mid2:#453969;
-    --accent-yellow:#FFDE59;
-    --accent-pink:#FF9FB2;
-    --accent-lavender:#C9B6EA;
-    --text-light:#FDF6EC;
-    --text-dim:#cfc3e8;
+    --navy: #17233d;
+    --navy-deep: #101a30;
+    --marigold: #f3a71c;
+    --coral: #e8664f;
+    --cream: #f7f1e4;
+    --cream-dim: #cfc6b3;
+    --line: rgba(247,241,228,0.14);
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0;padding:0;}
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+
   body{
-    font-family:'Quicksand', sans-serif;
-    color:var(--text-light);
-    background:var(--bg-deep);
-    overflow-x:hidden;
-  }
-  h1,h2,.script{font-family:'Caveat', cursive;}
-  .stars-bg{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse at 20% 20%, var(--bg-mid2) 0%, var(--bg-deep) 60%);
-  }
-  .stars-bg::before, .stars-bg::after{
-    content:""; position:absolute; inset:0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
-      radial-gradient(1px 1px at 90px 80px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 160px 140px, #fff, transparent),
-      radial-gradient(1px 1px at 230px 50px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 280px 190px, #fff, transparent),
-      radial-gradient(1px 1px at 330px 100px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 40px 210px, #fff, transparent),
-      radial-gradient(1px 1px at 380px 250px, #fff, transparent);
-    background-repeat:repeat; background-size:400px 300px;
-    opacity:.55;
-    animation:twinkle 4s ease-in-out infinite alternate;
-  }
-  .stars-bg::after{
-    background-position:60px 60px;
-    animation-duration:6s;
-    animation-delay:1s;
-  }
-  @keyframes twinkle{ from{opacity:.3;} to{opacity:.75;} }
-
-  /* ===== LOCK SCREEN ===== */
-  #lock{
-    position:fixed; inset:0; z-index:10;
-    display:flex; align-items:center; justify-content:center;
-    padding:24px;
-    transition:opacity .8s ease, visibility .8s ease;
-  }
-  #lock.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
-  .lock-card{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,222,89,0.25);
-    border-radius:24px;
-    padding:36px 28px 28px;
-    width:100%; max-width:340px;
-    text-align:center;
-    backdrop-filter:blur(6px);
-  }
-  .lock-icon{ font-size:34px; margin-bottom:6px; }
-  .lock-card h1{
-    font-size:32px; margin:0 0 4px; color:var(--accent-yellow); font-weight:700;
-  }
-  .lock-card p.sub{
-    font-size:14px; color:var(--text-dim); margin:0 0 22px; line-height:1.5;
-  }
-  .dots{ display:flex; gap:14px; justify-content:center; margin-bottom:24px; }
-  .dot{
-    width:16px; height:16px; border-radius:50%;
-    border:2px solid var(--accent-lavender);
-    background:transparent;
-    transition:background .15s ease, transform .15s ease, border-color .15s ease;
-  }
-  .dot.filled{ background:var(--accent-yellow); border-color:var(--accent-yellow); }
-  .dot.wrong{ background:var(--accent-pink); border-color:var(--accent-pink); }
-  .shake{ animation:shake .45s ease; }
-  @keyframes shake{
-    10%,90%{ transform:translateX(-2px); }
-    20%,80%{ transform:translateX(4px); }
-    30%,50%,70%{ transform:translateX(-8px); }
-    40%,60%{ transform:translateX(8px); }
-  }
-  .keypad{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
-  }
-  .key{
-    font-family:'Quicksand', sans-serif;
-    font-size:20px; font-weight:600;
-    color:var(--text-light);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.12);
-    border-radius:14px;
-    padding:14px 0;
-    cursor:pointer;
-    transition:background .15s ease, transform .1s ease;
-    user-select:none;
-  }
-  .key:active{ transform:scale(0.94); background:rgba(255,222,89,0.25); }
-  .key.wide{ font-size:14px; color:var(--text-dim); }
-  .hint{
-    margin-top:18px; font-size:12px; color:var(--text-dim); opacity:.75;
-    line-height:1.5;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
   }
 
-  /* ===== confetti canvas ===== */
-  #confetti{ position:fixed; inset:0; z-index:20; pointer-events:none; }
-
-  /* ===== SITE ===== */
-  #site{
-    position:relative; z-index:1;
-    scroll-snap-type:y proximity;
-  }
-  section{
-    min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:80px 24px;
-    text-align:center;
-    scroll-snap-align:start;
-    position:relative;
-  }
-  .eyebrow{
-    font-size:13px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--accent-pink); font-weight:600; margin-bottom:14px;
-  }
-  h1.big{ font-size:clamp(44px, 9vw, 84px); color:var(--accent-yellow); margin:0 0 18px; line-height:1.05; }
-  h2.mid{ font-size:clamp(32px, 6vw, 52px); color:var(--accent-yellow); margin:0 0 18px; }
-  p.lead{ font-size:clamp(16px,2.4vw,20px); color:var(--text-dim); max-width:560px; line-height:1.7; margin:0 auto; }
-  .scroll-cue{
-    position:absolute; bottom:32px; font-size:13px; color:var(--text-dim);
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    animation:bob 2s ease-in-out infinite;
-  }
-  .scroll-cue span{ font-size:20px; }
-  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
-
-  .floaters{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
-  .floaters span{
-    position:absolute; bottom:-40px; font-size:22px; opacity:.5;
-    animation:float 14s linear infinite;
-  }
-  @keyframes float{
-    from{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
-    10%{ opacity:.55; }
-    90%{ opacity:.4; }
-    to{ transform:translateY(-110vh) translateX(20px) rotate(30deg); opacity:0; }
+  h1, h2, .display{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
 
-  /* streak */
-  .streak-box{
-    margin:28px 0; display:flex; align-items:center; gap:14px;
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,222,89,.25);
-    border-radius:20px; padding:18px 30px;
-  }
-  .streak-num{ font-size:44px; font-weight:700; color:var(--accent-yellow); font-family:'Caveat',cursive; }
-  .streak-label{ font-size:13px; color:var(--text-dim); text-align:left; }
-
-  /* reasons grid */
-  .cards-grid{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px; max-width:840px; width:100%; margin-top:12px;
-  }
-  .flip-card{ perspective:1000px; height:180px; cursor:pointer; }
-  .flip-inner{
-    position:relative; width:100%; height:100%; transition:transform .6s;
-    transform-style:preserve-3d;
-  }
-  .flip-card.flipped .flip-inner{ transform:rotateY(180deg); }
-  .flip-front, .flip-back{
-    position:absolute; inset:0; backface-visibility:hidden;
-    border-radius:18px; padding:20px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    border:1px solid rgba(255,255,255,0.12);
-  }
-  .flip-front{ background:rgba(255,255,255,0.05); }
-  .flip-front .num{ font-size:36px; color:var(--accent-lavender); font-family:'Caveat',cursive; }
-  .flip-front .tap{ font-size:12px; color:var(--text-dim); margin-top:8px; }
-  .flip-back{
-    background:rgba(255,222,89,0.12); transform:rotateY(180deg);
-    font-size:15px; line-height:1.5; color:var(--text-light);
+  .wrap{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
   }
 
-  /* game */
-  #gameCanvas{
-    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,.12);
-    border-radius:20px; touch-action:none; max-width:100%;
-  }
-  .game-hud{
-    display:flex; gap:28px; margin-bottom:16px; font-size:15px; color:var(--text-dim);
-  }
-  .game-hud b{ color:var(--accent-yellow); font-size:18px; }
-  #gameMsg{
-    margin-top:18px; font-size:16px; color:var(--accent-pink); max-width:420px; line-height:1.6; min-height:24px;
-  }
-  .btn{
-    font-family:'Quicksand',sans-serif; font-weight:600; font-size:15px;
-    color:var(--bg-deep); background:var(--accent-yellow);
-    border:none; border-radius:999px; padding:12px 28px; cursor:pointer;
-    margin-top:10px; transition:transform .15s ease;
-  }
-  .btn:active{ transform:scale(0.95); }
-  .btn.ghost{
-    background:transparent; color:var(--text-light);
-    border:1px solid var(--accent-lavender);
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 96px 0 72px;
+    background:
+      radial-gradient(480px 280px at 82% -10%, rgba(243,167,28,0.18), transparent 70%),
+      radial-gradient(420px 260px at 8% 8%, rgba(232,102,79,0.14), transparent 70%),
+      var(--navy-deep);
+    border-bottom: 1px solid var(--line);
   }
 
-  /* letter */
-  .letter-box{
-    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,.12);
-    border-radius:22px; padding:36px 30px; max-width:560px; width:100%;
-    text-align:left; min-height:280px;
+  .plane{
+    position:absolute;
+    top: 54px;
+    right: 8%;
+    width: 90px;
+    opacity: 0.9;
+    animation: fly 5.5s ease-in-out infinite;
   }
-  .letter-box p{ font-size:17px; line-height:1.8; color:var(--text-light); white-space:pre-wrap; margin:0; }
-  .cursor{ display:inline-block; width:2px; background:var(--accent-yellow); animation:blink 1s step-end infinite; margin-left:2px; }
-  @keyframes blink{ 50%{ opacity:0; } }
+  @keyframes fly{
+    0%,100%{ transform: translate(0,0) rotate(-6deg); }
+    50%{ transform: translate(-14px,10px) rotate(-3deg); }
+  }
+  @media (prefers-reduced-motion: reduce){ .plane{ animation: none; } }
 
-  footer{ font-size:13px; color:var(--text-dim); opacity:.6; padding:20px; text-align:center; }
+  .eyebrow-line{
+    font-size: 15px;
+    color: var(--cream-dim);
+    margin: 0 0 14px;
+  }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
+  .hero h1{
+    font-size: clamp(38px, 7vw, 62px);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    color: var(--cream);
+  }
+  .hero h1 .accent{ color: var(--marigold); }
+
+  .hero p.sub{
+    font-size: 18px;
+    color: var(--cream-dim);
+    max-width: 480px;
+    margin: 0;
+  }
+
+  /* ---------- Countdown ---------- */
+  .countdown-section{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .countdown-label{
+    font-size: 16px;
+    color: var(--cream-dim);
+    margin: 0 0 20px;
+  }
+
+  .countdown-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .cbox{
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 8px 16px;
+    text-align: center;
+  }
+
+  .cbox .num{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 6vw, 40px);
+    color: var(--marigold);
+    line-height: 1;
+    display: block;
+  }
+  .cbox .num.arrived{ color: var(--coral); }
+
+  .cbox .unit{
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-top: 6px;
+    display: block;
+  }
+
+  .arrived-msg{
+    margin-top: 18px;
+    font-size: 17px;
+    color: var(--marigold);
+    display: none;
+  }
+
+  /* ---------- Letter ---------- */
+  .letter-section{
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .letter-section h2{
+    font-size: 30px;
+    margin: 0 0 24px;
+    color: var(--cream);
+  }
+
+  .letter{
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--coral);
+    border-radius: 4px 14px 14px 4px;
+    padding: 32px 28px;
+    font-size: 17px;
+    color: var(--cream);
+  }
+
+  .letter p{ margin: 0 0 16px; }
+  .letter p:last-child{ margin-bottom: 0; }
+
+  .signoff{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--marigold);
+    margin-top: 8px;
+  }
+
+  /* ---------- Tips ---------- */
+  .tips-section{
+    padding: 64px 0 80px;
+  }
+
+  .tips-section h2{
+    font-size: 30px;
+    margin: 0 0 8px;
+    color: var(--cream);
+  }
+
+  .tips-intro{
+    color: var(--cream-dim);
+    margin: 0 0 32px;
+    font-size: 16px;
+  }
+
+  .tip-list{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .tip{
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 18px 18px;
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .tip .icon{
+    font-size: 24px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .tip h3{
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--cream);
+  }
+
+  .tip p{
+    margin: 0;
+    font-size: 15px;
+    color: var(--cream-dim);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 40px 0 60px;
+    text-align: center;
+    color: var(--cream-dim);
+    font-size: 14px;
+  }
+  footer .heart{ color: var(--coral); }
+
+  @media (max-width: 520px){
+    .countdown-grid{ gap: 8px; }
+    .cbox{ padding: 16px 4px 12px; }
+    .letter{ padding: 24px 20px; }
   }
 </style>
 </head>
 <body>
 
-<div class="stars-bg"></div>
-<canvas id="confetti"></canvas>
-
-<!-- LOCK SCREEN -->
-<div id="lock">
-  <div class="lock-card">
-    <div class="lock-icon">🔒</div>
-    <h1>hey you</h1>
-    <p class="sub">this one's just for you. you'll need the code to open it.</p>
-    <div class="dots" id="dots">
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-    <div class="keypad" id="keypad">
-      <button class="key" data-k="1">1</button>
-      <button class="key" data-k="2">2</button>
-      <button class="key" data-k="3">3</button>
-      <button class="key" data-k="4">4</button>
-      <button class="key" data-k="5">5</button>
-      <button class="key" data-k="6">6</button>
-      <button class="key" data-k="7">7</button>
-      <button class="key" data-k="8">8</button>
-      <button class="key" data-k="9">9</button>
-      <button class="key wide" data-k="clear">clear</button>
-      <button class="key" data-k="0">0</button>
-      <button class="key wide" data-k="back">⌫</button>
-    </div>
-    <p class="hint">hint: your day, then my day 💛</p>
-  </div>
-</div>
-
-<!-- MAIN SITE -->
-<div id="site">
-
-  <section id="hero">
-    <div class="floaters">
-      <span style="left:8%; animation-delay:0s;">✨</span>
-      <span style="left:22%; animation-delay:2s;">💛</span>
-      <span style="left:40%; animation-delay:4s;">✨</span>
-      <span style="left:58%; animation-delay:1s;">💫</span>
-      <span style="left:74%; animation-delay:3s;">💛</span>
-      <span style="left:88%; animation-delay:5s;">✨</span>
-    </div>
-    <div class="eyebrow">you unlocked it</div>
-    <h1 class="big">you are so, so special</h1>
-    <p class="lead">before you scroll any further - this entire little site exists for one reason: because you exist, and that matters to me more than you probably know.</p>
-    <div class="scroll-cue">keep going <span>↓</span></div>
-  </section>
-
-  <section id="origin">
-    <div class="eyebrow">chapter one</div>
-    <h2 class="mid">a ghost, a streak, and a very good decision</h2>
-    <p class="lead">it started on snapchat - a couple of random snaps, a streak neither of us let die, and a lot of conversations that were supposed to be small talk. i didn't know it yet, but that streak was quietly turning into something a lot bigger than a little fire emoji next to your name.</p>
-    <div class="streak-box">
-      <div class="streak-num" id="streakNum">2</div>
-      <div class="streak-label">days and counting -<br>none of them wasted on you.</div>
+  <section class="hero">
+    <div class="wrap">
+      <svg class="plane" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 55 L55 45 L85 20 L92 24 L70 48 L88 52 L92 58 L68 58 L48 78 L40 76 L48 55 L10 55 Z"
+              fill="#f3a71c" opacity="0.95"/>
+      </svg>
+      <p class="eyebrow-line">A very unofficial welcome committee</p>
+      <h1>Ritika lands in <span class="accent">Coventry.</span><br>Warwick, get ready.</h1>
+      <p class="sub">Somewhere between Mumbai and the Midlands, someone built you a website. That someone is Rohan, and he has too much free time and too much love for you.</p>
     </div>
   </section>
 
-  <section id="reasons">
-    <div class="eyebrow">chapter two</div>
-    <h2 class="mid">reasons you matter (a very incomplete list)</h2>
-    <p class="lead" style="margin-bottom:8px;">tap each card. there are more reasons than cards, i just ran out of room.</p>
-    <div class="cards-grid" id="cardsGrid"></div>
-  </section>
-
-  <section id="game">
-    <div class="eyebrow">chapter three</div>
-    <h2 class="mid">okay, but first - a game</h2>
-    <p class="lead" style="margin-bottom:18px;">catch as many stars as you can in 20 seconds. think of each one as a reason you're loved.</p>
-    <div class="game-hud">
-      <div>score <b id="scoreOut">0</b></div>
-      <div>time <b id="timeOut">20</b></div>
+  <section class="countdown-section">
+    <div class="wrap">
+      <p class="countdown-label">Time until touchdown &mdash; 24 September</p>
+      <div class="countdown-grid" id="countdown">
+        <div class="cbox"><span class="num" id="days">--</span><span class="unit">days</span></div>
+        <div class="cbox"><span class="num" id="hours">--</span><span class="unit">hours</span></div>
+        <div class="cbox"><span class="num" id="mins">--</span><span class="unit">minutes</span></div>
+        <div class="cbox"><span class="num" id="secs">--</span><span class="unit">seconds</span></div>
+      </div>
+      <p class="arrived-msg" id="arrivedMsg">She's landed. Go get her. 🎉</p>
     </div>
-    <canvas id="gameCanvas" width="480" height="380"></canvas>
-    <button class="btn" id="startGameBtn">start catching ⭐</button>
-    <p id="gameMsg"></p>
   </section>
 
-  <section id="letter">
-    <div class="eyebrow">last chapter (for now)</div>
-    <h2 class="mid">one more thing</h2>
-    <div class="letter-box"><p id="letterText"><span class="cursor">&nbsp;</span></p></div>
-  </section>
-
-  <section id="end">
-    <div class="floaters">
-      <span style="left:15%; animation-delay:0s;">💛</span>
-      <span style="left:35%; animation-delay:3s;">✨</span>
-      <span style="left:55%; animation-delay:1s;">💫</span>
-      <span style="left:75%; animation-delay:4s;">💛</span>
+  <section class="letter-section">
+    <div class="wrap">
+      <h2>A short, slightly dramatic letter</h2>
+      <div class="letter">
+        <p>Ritika,</p>
+        <p>You're about to trade Mumbai humidity for Coventry drizzle, and honestly, the drizzle doesn't stand a chance against you. University of Warwick has no idea what's coming.</p>
+        <p>I know moving countries for a course is a big, slightly terrifying, mostly exciting thing. New city, new timetable, new understanding of what "cold" means. But you've got a whole welcome party of one very over-invested friend waiting on this side, plus a list of places that will make Coventry feel like yours faster than you'd think.</p>
+        <p>Also, just so it's said properly and not just implied: I'm around. Whenever things feel like too much, or you're missing home, or it's just one of those low days &mdash; I'm here. Free hugs, terrible jokes, and someone to complain about the weather with, on tap, always.</p>
+        <p>So land safely, bring a warm jacket, and text me the second you're through arrivals. Chai's on me &mdash; badly made, since this is England, but on me.</p>
+        <p class="signoff">&mdash; Rohan</p>
+      </div>
     </div>
-    <div class="eyebrow">the end. for now.</div>
-    <h2 class="mid">thank you for being you</h2>
-    <p class="lead">that's really the whole website. made with a lot of overthinking and zero regrets - because you deserved to see it in writing.</p>
-    <button class="btn" id="replayBtn">relive it 💛</button>
   </section>
 
-  <footer>made for you, on purpose, for no reason at all.</footer>
-</div>
+  <section class="tips-section">
+    <div class="wrap">
+      <h2>Coventry, decoded</h2>
+      <p class="tips-intro">A few things that'll make the first weeks easier.</p>
+      <div class="tip-list">
+        <div class="tip">
+          <span class="icon">🚉</span>
+          <div>
+            <h3>Coventry station to Warwick campus</h3>
+            <p>The X17/U1 buses run regularly from the city centre to Warwick's campus, and it's about 20&ndash;25 minutes. Get an app-based bus pass early &mdash; it's cheaper than paying per ride.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <span class="icon">🛍️</span>
+          <div>
+            <h3>Groceries and Indian essentials</h3>
+            <p>Foleshill Road has proper Indian grocery stores for spices, snacks, and things Tesco will never stock. Worth the trip in the first week.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <span class="icon">🌧️</span>
+          <div>
+            <h3>The weather will lie to you</h3>
+            <p>Sunny mornings turn into rain by lunch, often. Keep a compact umbrella in your bag permanently &mdash; not just when it "looks like rain."</p>
+          </div>
+        </div>
+        <div class="tip">
+          <span class="icon">🏛️</span>
+          <div>
+            <h3>Coventry itself is worth exploring</h3>
+            <p>The Cathedral ruins next to the new Cathedral, Coventry Transport Museum, and the canal basin are good low-key weekend spots when you need a break from campus.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <span class="icon">📱</span>
+          <div>
+            <h3>SIM and bank sorted early</h3>
+            <p>Sort a UK SIM and a student bank account in the first few days &mdash; most freshers' desks on campus help with both, and it saves a lot of admin stress later.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made with mild chaos and a lot of <span class="heart">♥</span> by Rohan, ahead of 24 September.
+  </footer>
 
 <script>
-/* ---------- CONFIG (edit here) ---------- */
-const REASONS = [
-  "you make ordinary days feel a little less ordinary.",
-  "you listen like it actually matters - because you make it matter.",
-  "you laugh at my terrible jokes. or you're just really kind. either way, thank you.",
-  "you've become one of the first people i want to tell things to.",
-  "a random 'just checking in' text from you can turn my whole day around.",
-  "simply put: things are better with you in them."
-];
+  var arrival = new Date("2026-09-24T00:00:00");
 
-const LETTER = `hey you,
+  function updateCountdown(){
+    var now = new Date();
+    var diff = arrival - now;
 
-i don't say this enough, so i'm saying it here, where i can't chicken out: you matter to me. not in a small, casual way - in a real, "genuinely glad you exist" kind of way.
-
-from a snapchat streak to wherever we are now, you've become someone i honestly can't imagine not having around.
-
-so - happy no particular day. this is just me, in writing, saying thank you for being you.
-
-— always`;
-
-/* ---------- LOCK SCREEN ---------- */
-const CODE = "3026";
-let entered = "";
-const dotsEl = document.getElementById('dots');
-const dots = Array.from(dotsEl.children);
-const lockEl = document.getElementById('lock');
-
-function renderDots(state){
-  dots.forEach((d,i)=>{
-    d.classList.remove('filled','wrong');
-    if(i < entered.length){
-      d.classList.add(state === 'wrong' ? 'wrong' : 'filled');
+    if(diff <= 0){
+      document.getElementById('countdown').style.display = 'none';
+      document.getElementById('arrivedMsg').style.display = 'block';
+      return;
     }
-  });
-}
 
-function tryUnlock(){
-  if(entered === CODE){
-    launchConfetti();
-    setTimeout(()=>{ lockEl.classList.add('hidden'); startStreakCount(); }, 500);
-  } else {
-    renderDots('wrong');
-    dotsEl.classList.add('shake');
-    setTimeout(()=>{
-      dotsEl.classList.remove('shake');
-      entered = "";
-      renderDots();
-    }, 500);
+    var d = Math.floor(diff / (1000*60*60*24));
+    var h = Math.floor((diff / (1000*60*60)) % 24);
+    var m = Math.floor((diff / (1000*60)) % 60);
+    var s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent = d;
+    document.getElementById('hours').textContent = h;
+    document.getElementById('mins').textContent = m;
+    document.getElementById('secs').textContent = s;
   }
-}
 
-document.getElementById('keypad').addEventListener('click', (e)=>{
-  const btn = e.target.closest('.key');
-  if(!btn) return;
-  const k = btn.dataset.k;
-  if(k === 'clear'){ entered = ""; renderDots(); return; }
-  if(k === 'back'){ entered = entered.slice(0,-1); renderDots(); return; }
-  if(entered.length >= 4) return;
-  entered += k;
-  renderDots();
-  if(entered.length === 4){ setTimeout(tryUnlock, 150); }
-});
-
-document.addEventListener('keydown', (e)=>{
-  if(lockEl.classList.contains('hidden')) return;
-  if(/^[0-9]$/.test(e.key) && entered.length < 4){ entered += e.key; renderDots(); if(entered.length===4) setTimeout(tryUnlock,150); }
-  if(e.key === 'Backspace'){ entered = entered.slice(0,-1); renderDots(); }
-});
-
-/* ---------- CONFETTI ---------- */
-const confettiCanvas = document.getElementById('confetti');
-const cctx = confettiCanvas.getContext('2d');
-function resizeConfetti(){ confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
-resizeConfetti();
-window.addEventListener('resize', resizeConfetti);
-
-function launchConfetti(){
-  const colors = ['#FFDE59','#FF9FB2','#C9B6EA','#FDF6EC'];
-  let pieces = Array.from({length:120}, ()=>({
-    x: confettiCanvas.width/2,
-    y: confettiCanvas.height/2,
-    vx: (Math.random()-0.5)*14,
-    vy: (Math.random()-1.3)*14,
-    size: 4+Math.random()*5,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    rot: Math.random()*360,
-    vr: (Math.random()-0.5)*10,
-    life: 0
-  }));
-  let frame = 0;
-  function tick(){
-    cctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
-    frame++;
-    pieces.forEach(p=>{
-      p.vy += 0.25;
-      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
-      cctx.save();
-      cctx.translate(p.x,p.y);
-      cctx.rotate(p.rot*Math.PI/180);
-      cctx.fillStyle = p.color;
-      cctx.globalAlpha = Math.max(0, 1 - p.life/90);
-      cctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
-      cctx.restore();
-    });
-    if(frame < 100){ requestAnimationFrame(tick); }
-    else { cctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height); }
-  }
-  tick();
-}
-
-/* ---------- STREAK COUNTER ---------- */
-let streakStarted = false;
-function startStreakCount(){
-  if(streakStarted) return;
-  streakStarted = true;
-  const el = document.getElementById('streakNum');
-  const target = 2; /* edit this to your real streak / days known each other */
-  let n = 0;
-  const step = Math.max(1, Math.floor(target/60));
-  const iv = setInterval(()=>{
-    n += step;
-    if(n >= target){ n = target; clearInterval(iv); }
-    el.textContent = n;
-  }, 20);
-}
-
-/* ---------- FLIP CARDS ---------- */
-const grid = document.getElementById('cardsGrid');
-REASONS.forEach((text, i)=>{
-  const card = document.createElement('div');
-  card.className = 'flip-card';
-  card.innerHTML = `
-    <div class="flip-inner">
-      <div class="flip-front"><div class="num">0${i+1}</div><div class="tap">tap to reveal</div></div>
-      <div class="flip-back">${text}</div>
-    </div>`;
-  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
-  grid.appendChild(card);
-});
-
-/* ---------- MINI GAME: catch the stars ---------- */
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const scoreOut = document.getElementById('scoreOut');
-const timeOut = document.getElementById('timeOut');
-const gameMsg = document.getElementById('gameMsg');
-const startBtn = document.getElementById('startGameBtn');
-
-let stars = [];
-let score = 0;
-let timeLeft = 20;
-let gameRunning = false;
-let gameTimer = null;
-let spawnTimer = null;
-let rafId = null;
-
-function drawStar(x,y,r,color){
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.beginPath();
-  for(let i=0;i<5;i++){
-    ctx.lineTo(Math.cos((18+i*72)*Math.PI/180)*r, -Math.sin((18+i*72)*Math.PI/180)*r);
-    ctx.lineTo(Math.cos((54+i*72)*Math.PI/180)*r*0.45, -Math.sin((54+i*72)*Math.PI/180)*r*0.45);
-  }
-  ctx.closePath();
-  ctx.fillStyle = color;
-  ctx.fill();
-  ctx.restore();
-}
-
-function spawnStar(){
-  stars.push({
-    x: 20 + Math.random()*(canvas.width-40),
-    y: -20,
-    r: 14 + Math.random()*8,
-    speed: 1.2 + Math.random()*1.8,
-    color: Math.random() > 0.5 ? '#FFDE59' : '#FF9FB2',
-    caught: false
-  });
-}
-
-function gameLoop(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  stars.forEach(s=>{
-    s.y += s.speed;
-    if(!s.caught) drawStar(s.x, s.y, s.r, s.color);
-  });
-  stars = stars.filter(s => s.y < canvas.height + 30 && !s.caught);
-  if(gameRunning) rafId = requestAnimationFrame(gameLoop);
-}
-
-function handleCatch(clientX, clientY){
-  if(!gameRunning) return;
-  const rect = canvas.getBoundingClientRect();
-  const x = (clientX - rect.left) * (canvas.width/rect.width);
-  const y = (clientY - rect.top) * (canvas.height/rect.height);
-  for(const s of stars){
-    if(s.caught) continue;
-    const d = Math.hypot(s.x-x, s.y-y);
-    if(d < s.r + 12){
-      s.caught = true;
-      score++;
-      scoreOut.textContent = score;
-      break;
-    }
-  }
-}
-canvas.addEventListener('click', (e)=> handleCatch(e.clientX, e.clientY));
-canvas.addEventListener('touchstart', (e)=>{
-  e.preventDefault();
-  const t = e.touches[0];
-  handleCatch(t.clientX, t.clientY);
-}, {passive:false});
-
-function endGame(){
-  gameRunning = false;
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-  cancelAnimationFrame(rafId);
-  let msg;
-  if(score >= 15){
-    msg = "wow - okay, you're basically a star-catching legend. also just a legend in general.";
-  } else if(score >= 7){
-    msg = "great job! (you were always going to win either way, honestly.)";
-  } else {
-    msg = "however many you caught, you already caught the important thing: my attention, my time, and my heart. cheesy? yes. true? also yes.";
-  }
-  gameMsg.textContent = msg;
-  startBtn.textContent = "play again 🔁";
-}
-
-startBtn.addEventListener('click', ()=>{
-  score = 0; timeLeft = 20; stars = [];
-  scoreOut.textContent = 0; timeOut.textContent = 20;
-  gameMsg.textContent = "";
-  gameRunning = true;
-  startBtn.textContent = "catching...";
-  gameLoop();
-  spawnTimer = setInterval(spawnStar, 550);
-  gameTimer = setInterval(()=>{
-    timeLeft--;
-    timeOut.textContent = timeLeft;
-    if(timeLeft <= 0) endGame();
-  }, 1000);
-});
-
-/* ---------- LETTER TYPEWRITER ---------- */
-let letterTyped = false;
-const letterEl = document.getElementById('letterText');
-function typeLetter(){
-  if(letterTyped) return;
-  letterTyped = true;
-  let i = 0;
-  letterEl.textContent = "";
-  const cursor = document.createElement('span');
-  cursor.className = 'cursor';
-  cursor.innerHTML = '&nbsp;';
-  function step(){
-    if(i < LETTER.length){
-      letterEl.textContent = LETTER.slice(0, i+1);
-      letterEl.appendChild(cursor);
-      i++;
-      setTimeout(step, 18);
-    } else {
-      cursor.remove();
-    }
-  }
-  step();
-}
-
-/* ---------- SCROLL TRIGGERS ---------- */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      if(entry.target.id === 'origin') startStreakCount();
-      if(entry.target.id === 'letter') typeLetter();
-    }
-  });
-}, {threshold:0.4});
-['origin','letter'].forEach(id=> io.observe(document.getElementById(id)));
-
-/* ---------- REPLAY ---------- */
-document.getElementById('replayBtn').addEventListener('click', ()=>{
-  document.getElementById('hero').scrollIntoView({behavior:'smooth'});
-});
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 </script>
+
 </body>
 </html>
