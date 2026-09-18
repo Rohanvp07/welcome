@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live: Mumbai to Coventry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #17233d;
+    --navy-deep: #101a30;
+    --marigold: #f3a71c;
+    --coral: #e8664f;
+    --cream: #f7f1e4;
+    --cream-dim: #cfc6b3;
+    --line: rgba(247,241,228,0.14);
+    --green: #6fbf8b;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.55;
+  }
+  h1, h2{ font-family: 'Baloo 2', sans-serif; font-weight: 700; }
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  .nav-links{
+    display: flex;
+    gap: 10px;
+    margin: 28px 28px 0;
+    flex-wrap: wrap;
+  }
+  .nav-links a{
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: 13.5px;
+    border: 1px solid var(--line);
+    padding: 7px 13px;
+    border-radius: 20px;
+  }
+  .nav-links a:hover{ color: var(--marigold); border-color: var(--marigold); }
+
+  .hero{
+    padding: 44px 0 40px;
+    background: radial-gradient(480px 280px at 82% -10%, rgba(243,167,28,0.16), transparent 70%), var(--navy-deep);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero h1{
+    font-size: clamp(30px, 6vw, 46px);
+    margin: 0 0 12px;
+  }
+  .hero h1 .accent{ color: var(--marigold); }
+  .hero p.sub{
+    font-size: 16px;
+    color: var(--cream-dim);
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .tracker-section{ padding: 48px 0 56px; border-bottom: 1px solid var(--line); }
+
+  .status-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(111,191,139,0.12);
+    border: 1px solid rgba(111,191,139,0.4);
+    color: var(--green);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
+  .status-pill .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
+
+  .distance-hero{
+    text-align: center;
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px 20px 30px;
+    margin-bottom: 26px;
+  }
+  .distance-hero .num{
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(46px, 11vw, 70px);
+    font-weight: 800;
+    color: var(--marigold);
+    line-height: 1;
+  }
+  .distance-hero .unit-label{
+    font-size: 14px;
+    color: var(--cream-dim);
+    margin-top: 8px;
+  }
+  .distance-hero .status-text{
+    font-size: 16px;
+    color: var(--cream);
+    margin-top: 16px;
+  }
+  .distance-hero .flavor{
+    font-size: 13.5px;
+    color: var(--cream-dim);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ---------- Route bar ---------- */
+  .route-bar-wrap{ margin-bottom: 8px; }
+  .route-labels{
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-bottom: 8px;
+  }
+  .route-labels .end-label{ text-align: right; }
+  .mid-marker-label{
+    position: absolute;
+    top: -20px;
+    font-size: 11px;
+    color: var(--cream-dim);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .route-track{
+    position: relative;
+    height: 6px;
+    background: rgba(247,241,228,0.12);
+    border-radius: 4px;
+    margin: 28px 0 6px;
+  }
+  .route-fill{
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--coral), var(--marigold));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+  .mid-dot{
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--cream-dim);
+    transform: translate(-50%,-50%);
+  }
+  .plane-marker{
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    font-size: 20px;
+    transform: translate(-50%,-55%);
+    transition: left 0.6s ease;
+  }
+
+  .route-end-labels{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    margin-top: 6px;
+  }
+  .route-end-labels .mid{
+    position: relative;
+    left: 30%;
+  }
+
+  .breakdown{
+    display: flex;
+    gap: 12px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .b-pill{
+    flex: 1;
+    min-width: 140px;
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .b-pill .b-num{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--cream);
+  }
+  .b-pill .b-label{
+    font-size: 12px;
+    color: var(--cream-dim);
+    margin-top: 2px;
+  }
+
+  .disclaimer{
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    margin-top: 20px;
+    opacity: 0.75;
+  }
+
+  footer{
+    padding: 32px 0 56px;
+    text-align: center;
+    color: var(--cream-dim);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="nav-links">
+    <a href="ritika-welcome-coventry.html">&larr; Welcome page</a>
+    <a href="journey.html">Flight &amp; ground journey</a>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Mumbai to Coventry, <span class="accent">live.</span></h1>
+      <p class="sub">A running, slightly unofficial estimate of exactly how many miles are left between us, updating every second.</p>
+    </div>
+  </section>
+
+  <section class="tracker-section">
+    <div class="wrap">
+      <span class="status-pill"><span class="dot"></span> Live estimate</span>
+
+      <div class="distance-hero">
+        <div class="num" id="distanceNum">----</div>
+        <div class="unit-label">miles left to Coventry</div>
+        <div class="status-text" id="statusText">Calculating&hellip;</div>
+        <div class="flavor" id="flavorText"></div>
+      </div>
+
+      <div class="route-bar-wrap">
+        <div class="route-track">
+          <div class="route-fill" id="routeFill"></div>
+          <div class="mid-dot"></div>
+          <span class="plane-marker" id="planeMarker">&#9992;&#65039;</span>
+        </div>
+        <div class="route-end-labels">
+          <span>Mumbai</span>
+          <span class="mid">Heathrow</span>
+          <span>Coventry</span>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <div class="b-pill">
+          <div class="b-num">4,455 mi</div>
+          <div class="b-label">Mumbai &rarr; Heathrow (air)</div>
+        </div>
+        <div class="b-pill">
+          <div class="b-num">95 mi</div>
+          <div class="b-label">Heathrow &rarr; Coventry (ground)</div>
+        </div>
+        <div class="b-pill">
+          <div class="b-num">~4,550 mi</div>
+          <div class="b-label">total, door to door</div>
+        </div>
+      </div>
+
+      <p class="disclaimer">This assumes the flight covers ground at a steady pace along a straight line, and freezes the ground leg once she's landed, since I've got no way to track a taxi in real time. Not actual flight-tracker data &mdash; just a fun approximation.</p>
+    </div>
+  </section>
+
+  <footer>
+    Refreshing itself every second so you don't have to.
+  </footer>
+
+<script>
+  // Flight: Mumbai (BOM) 04:35 IST -> London Heathrow (LHR) 10:00 BST, 24 Sep 2026
+  var departure = new Date("2026-09-24T04:35:00+05:30");
+  var arrival   = new Date("2026-09-24T10:00:00+01:00");
+
+  var AIR_MILES = 4455;
+  var GROUND_MILES = 95;
+  var TOTAL_MILES = AIR_MILES + GROUND_MILES;
+
+  var flavors = [
+    [0.00, "still on the runway in Mumbai"],
+    [0.05, "climbing out over the Arabian Sea"],
+    [0.20, "somewhere over Iran"],
+    [0.40, "crossing into Turkey"],
+    [0.58, "over Eastern Europe"],
+    [0.78, "over Western Europe, getting close"],
+    [0.95, "descending into London"]
+  ];
+
+  function flavorFor(frac){
+    var chosen = flavors[0][1];
+    for (var i = 0; i < flavors.length; i++){
+      if (frac >= flavors[i][0]) chosen = flavors[i][1];
+    }
+    return chosen;
+  }
+
+  function update(){
+    var now = new Date();
+    var distanceEl = document.getElementById('distanceNum');
+    var statusEl = document.getElementById('statusText');
+    var flavorEl = document.getElementById('flavorText');
+    var fillEl = document.getElementById('routeFill');
+    var planeEl = document.getElementById('planeMarker');
+
+    if (now < departure){
+      distanceEl.textContent = TOTAL_MILES.toLocaleString();
+      statusEl.textContent = "Still on the ground in Mumbai \u2014 wheels up on 24 Sep.";
+      flavorEl.textContent = "";
+      fillEl.style.width = "0%";
+      planeEl.style.left = "0%";
+    } else if (now <= arrival){
+      var frac = (now - departure) / (arrival - departure);
+      var airLeft = AIR_MILES * (1 - frac);
+      var remaining = airLeft + GROUND_MILES;
+      distanceEl.textContent = Math.round(remaining).toLocaleString();
+      statusEl.textContent = "In the air, on the way to Heathrow.";
+      flavorEl.textContent = "Roughly " + flavorFor(frac) + ".";
+      var barPct = frac * 80;
+      fillEl.style.width = barPct + "%";
+      planeEl.style.left = barPct + "%";
+    } else {
+      distanceEl.textContent = GROUND_MILES.toLocaleString();
+      statusEl.textContent = "Landed at Heathrow \u2014 down to the last stretch.";
+      flavorEl.textContent = "95 miles of England left between us.";
+      fillEl.style.width = "80%";
+      planeEl.style.left = "80%";
+    }
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>
+
+</body>
+</html>
